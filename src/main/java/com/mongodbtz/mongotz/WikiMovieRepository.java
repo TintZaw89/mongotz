@@ -16,4 +16,7 @@ public interface WikiMovieRepository extends MongoRepository<WikiMovie,String>{
 
     @Query("{ cast: ['?0'] }")
     List<WikiMovie> findItemByCast(String cast);
+
+    @Query("{ year: ?0, genres: ?1 }")
+    List<WikiMovie> findMovieByYearAndGenres(Integer year,String genres);
 }

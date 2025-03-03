@@ -12,15 +12,11 @@ public class WikiMoviesController {
     @Autowired
     private WikiMovieRepository wikiMovieRepo;
 
-    // Save method is predefine method in Mongo Repository
-    // with this method we will save user in our database
     @PostMapping("/addMovie")
     public WikiMovie addMovie(@RequestBody WikiMovie movie) {
         return wikiMovieRepo.save(movie);
     }
 
-    // findAll method is predefine method in Mongo Repository
-    // with this method we will all user that is save in our database
     @GetMapping("/getAllMovies")
     public List<WikiMovie> getAllMovies(){
         return wikiMovieRepo.findAll();
@@ -51,6 +47,15 @@ public class WikiMoviesController {
     public ResponseEntity<List<WikiMovie>> findItemByCast(@PathVariable("cast") String cast){
         List<WikiMovie> wikiMovies;
         wikiMovies = wikiMovieRepo.findItemByCast(cast);
+        return ResponseEntity.ok(wikiMovies);
+    }
+
+    @GetMapping("/getMovieByYearAndGenres")
+    public ResponseEntity<List<WikiMovie>> findMovieByYearAndGenres
+            (@RequestParam(required = false,value="year") Integer year,
+             @RequestParam(required = false,value="genres") String genres){
+        List<WikiMovie> wikiMovies;
+        wikiMovies = wikiMovieRepo.findMovieByYearAndGenres(year,genres);
         return ResponseEntity.ok(wikiMovies);
     }
 }
