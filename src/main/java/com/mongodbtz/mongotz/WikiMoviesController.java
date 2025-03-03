@@ -46,4 +46,11 @@ public class WikiMoviesController {
         wikiMovies = wikiMovieRepo.findItemByGenres(genres);
         return ResponseEntity.ok(wikiMovies);
     }
+
+    @GetMapping("/getMovieByCast/{cast}")
+    public ResponseEntity<List<WikiMovie>> findItemByCast(@PathVariable("cast") String cast){
+        List<WikiMovie> wikiMovies;
+        wikiMovies = wikiMovieRepo.findItemByCast(cast);
+        return ResponseEntity.ok(wikiMovies);
+    }
 }
