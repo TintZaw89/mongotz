@@ -1,6 +1,12 @@
 package com.mongodbtz.mongotz;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document("WikiMovies")
 public class WikiMovie {
     @Id
@@ -41,11 +47,11 @@ public class WikiMovie {
         this.cast = cast;
     }
 
-    public String[] getGenre() {
+    public String[] getGenres() {
         return genres;
     }
 
-    public void setGenre(String[] genres) {
+    public void setGenres(String[] genres) {
         this.genres = genres;
     }
 }

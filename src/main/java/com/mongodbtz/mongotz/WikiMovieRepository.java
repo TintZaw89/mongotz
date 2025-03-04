@@ -4,9 +4,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface WikiMovieRepository extends MongoRepository<WikiMovie,String>{
-    @Query("{title:'?0'}")
-    List<WikiMovie> findItemByTitle(String title);
+public interface WikiMovieRepository extends MongoRepository<WikiMovie,Integer>{
+
+    @Query(value="{title: { $regex: /\\b?0\\b/ }}")
+    List<WikiMovie> findItemByTitle(String regexTitle);
 
     @Query("{year:?0}")
     List<WikiMovie> findItemByYear(Integer year);

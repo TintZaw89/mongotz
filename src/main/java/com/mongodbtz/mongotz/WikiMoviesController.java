@@ -1,16 +1,23 @@
 package com.mongodbtz.mongotz;
-import java.util.List;
 
+import java.util.List;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 @RestController
 @RequestMapping("/api/wikiMovie")
 public class WikiMoviesController {
     @Autowired
     private WikiMovieRepository wikiMovieRepo;
+    private final MongoTemplate mongoTemplate;
+
+    public WikiMoviesController(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @PostMapping("/addMovie")
     public WikiMovie addMovie(@RequestBody WikiMovie movie) {
@@ -25,7 +32,11 @@ public class WikiMoviesController {
     @GetMapping("/getMovieByTitle/{title}")
     public ResponseEntity<List<WikiMovie>> findItemByTitle(@PathVariable("title") String title){
         List<WikiMovie> wikiMovies;
-        wikiMovies = wikiMovieRepo.findItemByTitle(title);
+        String stringRegex = STR."{ title : { $regex : '\{title}' } }";
+        BasicQuery basicQuery = new BasicQuery(stringRegex);
+        wikiMovies = mongoTemplate.find(basicQuery, com.mongodbtz.mongotz.WikiMovie.class);
+        System.out.println(wikiMovies);
+        //wikiMovies = wikiMovieRepo.findItemByTitle(title);
         return ResponseEntity.ok(wikiMovies);
     }
 
