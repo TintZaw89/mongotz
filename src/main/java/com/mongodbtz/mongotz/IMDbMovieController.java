@@ -32,10 +32,26 @@ public class IMDbMovieController {
     @GetMapping("/getMovieByTitle/{name}")
     public ResponseEntity<List<IMDbMovie>> findItemByTitle(@PathVariable("name") String name){
         List<IMDbMovie> imdbMovies;
-        String stringRegex = STR."{ name : { $regex : '\{name}' } }";
+        String stringRegex = "{ name : { $regex : '" + name + "' } }";
         BasicQuery basicQuery = new BasicQuery(stringRegex);
         imdbMovies = imdbTemplate.find(basicQuery, IMDbMovie.class);
         System.out.println(imdbMovies);
+        return ResponseEntity.ok(imdbMovies);
+    }
+
+    @GetMapping("/getMovieByYearAndGenre")
+    public ResponseEntity<List<IMDbMovie>> findMovieByYearAndGenre (@RequestParam(required = false,value="year") String year,
+                                                                    @RequestParam(required = false,value="genre") String genre)
+    {
+        List<IMDbMovie> imdbMovies;
+        imdbMovies = imDbMovieRepository.findMovieByYearAndGenre(year,genre);
+        return ResponseEntity.ok(imdbMovies);
+    }
+
+    @GetMapping("/getMovieByYear/{year}")
+    public ResponseEntity<List<IMDbMovie>> findMovieByYearLike(@PathVariable("year") String year){
+        List<IMDbMovie> imdbMovies;
+        imdbMovies = imDbMovieRepository.findMovieByYearLike(year);
         return ResponseEntity.ok(imdbMovies);
     }
 }

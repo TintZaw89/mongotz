@@ -32,7 +32,7 @@ public class WikiMoviesController {
     @GetMapping("/getMovieByTitle/{title}")
     public ResponseEntity<List<WikiMovie>> findItemByTitle(@PathVariable("title") String title){
         List<WikiMovie> wikiMovies;
-        String stringRegex = STR."{ title : { $regex : '\{title}' } }";
+        String stringRegex = "{ title : { $regex : '" + title + "' } }";
         BasicQuery basicQuery = new BasicQuery(stringRegex);
         wikiMovies = mongoTemplate.find(basicQuery, com.mongodbtz.mongotz.WikiMovie.class);
         System.out.println(wikiMovies);
