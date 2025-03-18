@@ -8,4 +8,6 @@ public interface IMDbMovieRepository extends MongoRepository<IMDbMovie,String>{
     List<IMDbMovie> findMovieByYearAndGenre(String year,String genre);
 
     List<IMDbMovie> findMovieByYearLike(String year);
+
+    List<IMDbMovie> findMovieByCastLike(String cast);
 }

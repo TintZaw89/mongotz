@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @RestController
 @RequestMapping("/api/imdbMovie")
@@ -14,6 +16,8 @@ public class IMDbMovieController {
     private IMDbMovieRepository imDbMovieRepository;
 
     private final MongoTemplate imdbTemplate;
+
+    private static final Logger logger = LogManager.getLogger(IMDbMovieController.class);
 
     public IMDbMovieController(MongoTemplate imdbTemplate) {
         this.imdbTemplate = imdbTemplate;
@@ -35,7 +39,7 @@ public class IMDbMovieController {
         String stringRegex = "{ name : { $regex : '" + name + "' } }";
         BasicQuery basicQuery = new BasicQuery(stringRegex);
         imdbMovies = imdbTemplate.find(basicQuery, IMDbMovie.class);
-        System.out.println(imdbMovies);
+        logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }
 
@@ -45,6 +49,7 @@ public class IMDbMovieController {
     {
         List<IMDbMovie> imdbMovies;
         imdbMovies = imDbMovieRepository.findMovieByYearAndGenre(year,genre);
+        logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }
 
@@ -52,6 +57,15 @@ public class IMDbMovieController {
     public ResponseEntity<List<IMDbMovie>> findMovieByYearLike(@PathVariable("year") String year){
         List<IMDbMovie> imdbMovies;
         imdbMovies = imDbMovieRepository.findMovieByYearLike(year);
+        logger.info(imdbMovies);
+        return ResponseEntity.ok(imdbMovies);
+    }
+
+    @GetMapping("/getMovieByCast/{cast}")
+    public ResponseEntity<List<IMDbMovie>> findMovieByCastLike(@PathVariable("cast") String cast){
+        List<IMDbMovie> imdbMovies;
+        imdbMovies = imDbMovieRepository.findMovieByCastLike(cast);
+        logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }
 }
