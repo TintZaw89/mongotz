@@ -13,6 +13,7 @@ import java.util.ArrayList;
 @Setter
 @Getter
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Document("ImdbMovies")
@@ -41,4 +42,9 @@ public class IMDbMovie {
     private String director;
     @Field(value="cast")
     private ArrayList<Cast> cast;
+
+    public String getDirector() { return director == null ? "" : director;
+    }
+
+    public String[] getGenre() {return genre == null ? new String[]{""} : genre; }
 }

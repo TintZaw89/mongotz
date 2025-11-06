@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/imdbMovie")
 public class IMDbMovieController {
@@ -61,10 +62,26 @@ public class IMDbMovieController {
         return ResponseEntity.ok(imdbMovies);
     }
 
-    @GetMapping("/getMovieByCast/{cast}")
-    public ResponseEntity<List<IMDbMovie>> findMovieByCastLike(@PathVariable("cast") String cast){
+    @GetMapping("/getMovieByGenre/{genre}")
+    public ResponseEntity<List<IMDbMovie>> findMovieByGenre(@PathVariable("genre") String genre){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByCastLike(cast);
+        imdbMovies = imDbMovieRepository.findMovieByGenre(genre);
+        logger.info(imdbMovies);
+        return ResponseEntity.ok(imdbMovies);
+    }
+
+    @GetMapping("/getMovieByDirector/{director}")
+    public ResponseEntity<List<IMDbMovie>> findMovieByDirector(@PathVariable("director") String director){
+        List<IMDbMovie> imdbMovies;
+        imdbMovies = imDbMovieRepository.findMovieByDirectorLike(director);
+        logger.info(imdbMovies);
+        return ResponseEntity.ok(imdbMovies);
+    }
+
+    @GetMapping("/getMovieByCast/{cast}")
+    public ResponseEntity<List<IMDbMovie>> findMovieByCastLike(@PathVariable("cast") Object cast){
+        List<IMDbMovie> imdbMovies;
+        imdbMovies = imDbMovieRepository.findMovieByCastName(cast);
         logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }
