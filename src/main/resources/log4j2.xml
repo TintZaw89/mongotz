@@ -7,7 +7,7 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
         <!-- File Appender -->
-        <File name="FileAppender" fileName="C:\Users\WCT\Desktop\MyApp\Eclipse_JAVA_PROJ\com\mongotz\logs\full.log">
+        <File name="FileAppender" fileName="\com\mongotz\logs\full.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
         </File>
     </Appenders>
