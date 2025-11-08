@@ -28,7 +28,9 @@ public class IMDbMovie {
     }
 
     @Id
-    private String ImdbId;
+    private String _id;
+    @Field(value = "ImdbId")
+    private String imdbId;
     private String name;
     private String year;
     @Field(value = "runtime")

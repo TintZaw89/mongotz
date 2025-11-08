@@ -1,5 +1,7 @@
 package com.mongodbtz.mongotz;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/imdbMovie")
 public class IMDbMovieController {
@@ -29,9 +31,20 @@ public class IMDbMovieController {
         return imDbMovieRepository.save(movie);
     }
 
+    @PutMapping("/updateMovie/{_id}")
+    public ResponseEntity<String> updateIMDbMovie(@PathVariable String _id,@RequestBody IMDbMovieDto summaryText){
+        imDbMovieRepository.findMovieByImdbId(_id, summaryText.getSummaryText());
+        return ResponseEntity.ok("Update Successfully Successfully");
+    }
+
     @GetMapping("/getAllMovies")
     public List<IMDbMovie> getAllMovies(){
         return imDbMovieRepository.findAll();
+    }
+    
+    @GetMapping("/getMovie/{_id}")
+    public Optional<IMDbMovie> getMovieById(@PathVariable("_id") String _id) {
+        return imDbMovieRepository.findById(_id);
     }
 
     @GetMapping("/getMovieByTitle/{name}")
@@ -57,7 +70,7 @@ public class IMDbMovieController {
     @GetMapping("/getMovieByYear/{year}")
     public ResponseEntity<List<IMDbMovie>> findMovieByYearLike(@PathVariable("year") String year){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByYearLike(year);
+        imdbMovies = imDbMovieRepository.findMovieByYear(year);
         logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }
@@ -81,8 +94,9 @@ public class IMDbMovieController {
     @GetMapping("/getMovieByCast/{cast}")
     public ResponseEntity<List<IMDbMovie>> findMovieByCastLike(@PathVariable("cast") Object cast){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByCastName(cast);
+        imdbMovies = imDbMovieRepository.findMovieByCastNameLike(cast);
         logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }
+
 }

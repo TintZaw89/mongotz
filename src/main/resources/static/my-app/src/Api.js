@@ -1,5 +1,5 @@
 // api.js
-const BASE_URL = 'http://localhost:8100/api/imdbMovie/'; // Replace with your API base URL
+const BASE_URL = 'http://10.1.54.207:8100/api/imdbMovie/'; // Replace with your API base URL
 
 export const fetchData = async (ddlData, query) => {
   try {

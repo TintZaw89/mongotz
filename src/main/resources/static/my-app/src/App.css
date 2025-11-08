@@ -38,12 +38,18 @@ thead {
 }
 
 table,td,tr {
+  width: fit-content;
   border: 1px solid black;
   border-collapse: collapse;
   border-spacing: 30px;
   padding: 20px;
   text-align: left;
-  column-width: 400px;
+  column-width: "width:100%";
+}
+.pagination button.active {
+    border-color: blue;
+    background-color: yellowgreen;
+    color: black;
 }
 
 @keyframes App-logo-spin {
