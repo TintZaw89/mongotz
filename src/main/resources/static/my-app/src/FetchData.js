@@ -14,7 +14,6 @@ function FetchData() {
     const handleDropdownChange = (value) => {
     setSelectedValue(value);
   };
-    
     const handleSearch = async ( query) => {
     try {
         var ddlData = selectData (selectedValue);
@@ -31,11 +30,18 @@ function FetchData() {
     var movieSize;
     if (!data.length === null || !data.length === "" || data.length > 1 ) 
         movieSize = "s";
+    const asendingEvent = () => {
+        if (data.length > 0){
+            let result = data.sort((a,b)=> a.name.localeCompare(b.name))
+            setData(result)
+        }
+    }
 	return (
 	<div className='container'>
         Search with <MyDropdown  onSelectChange={handleDropdownChange} />
         <MyForm onSearch={handleSearch} />
 		<div className='mt-3'>
+            {/* <div style={{maginTop: '20px'}}><button onClick={asendingEvent}>Ascending</button></div> */}
 		<h1 className="text-center">Imdb Movie Lists </h1>
                 <table className="table table-striped">
                     <thead>
@@ -74,6 +80,7 @@ function FetchData() {
                         }
                     </tbody>
                 </table>
+                
                 Total Record{movieSize}: {data?.length}{setPostsPerPage}
                 <Pagination totalPosts={data?.length}
                             postsPerPage={postsPerPage}

@@ -1,7 +1,10 @@
 package com.mongodbtz.mongotz;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +14,16 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static org.springframework.core.OrderComparator.sort;
+
 //@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/imdbMovie")
 public class IMDbMovieController {
     @Autowired
     private IMDbMovieRepository imDbMovieRepository;
+
+    private IMDbMovie imDbMovie;
 
     private final MongoTemplate imdbTemplate;
 
@@ -32,7 +39,7 @@ public class IMDbMovieController {
     }
 
     @PutMapping("/updateMovie/{_id}")
-    public ResponseEntity<String> updateIMDbMovie(@PathVariable String _id,@RequestBody IMDbMovieDto summaryText){
+    public ResponseEntity<String> updateIMDbMovie(@PathVariable String _id,@RequestBody IMDbMovieSummaryDto summaryText){
         imDbMovieRepository.findMovieByImdbId(_id, summaryText.getSummaryText());
         return ResponseEntity.ok("Update Successfully Successfully");
     }
@@ -50,9 +57,10 @@ public class IMDbMovieController {
     @GetMapping("/getMovieByTitle/{name}")
     public ResponseEntity<List<IMDbMovie>> findItemByTitle(@PathVariable("name") String name){
         List<IMDbMovie> imdbMovies;
-        String stringRegex = "{ name : { $regex : '" + name + "' } }";
-        BasicQuery basicQuery = new BasicQuery(stringRegex);
-        imdbMovies = imdbTemplate.find(basicQuery, IMDbMovie.class);
+        //String stringRegex = "{ name : { $regex : '" + name + "', $options: 'i' } }";
+        //BasicQuery basicQuery = new BasicQuery(stringRegex);
+        //imdbMovies = imdbTemplate.find(basicQuery, IMDbMovie.class);
+        imdbMovies = imDbMovieRepository.findMovieByTitle(name);
         logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }
@@ -92,9 +100,9 @@ public class IMDbMovieController {
     }
 
     @GetMapping("/getMovieByCast/{cast}")
-    public ResponseEntity<List<IMDbMovie>> findMovieByCastLike(@PathVariable("cast") Object cast){
+    public ResponseEntity<List<IMDbMovie>> findMovieByCastLike(@PathVariable("cast") String cast){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByCastNameLike(cast);
+        imdbMovies = imDbMovieRepository.findMovieByCastName(cast);
         logger.info(imdbMovies);
         return ResponseEntity.ok(imdbMovies);
     }

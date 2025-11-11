@@ -42,7 +42,7 @@ class MongoTZApplicationTests {
 	public void setup(){
 
 	imDbMovie = IMDbMovie.builder()
-				.ImdbId("tt0938313")
+				.imdbId("tt0938313")
 				.name("The Lost World")
 				.build();
 
@@ -54,7 +54,7 @@ class MongoTZApplicationTests {
 		// precondition
 		List<IMDbMovie> movieList = new ArrayList<>();
 		movieList.add(imDbMovie);
-		movieList.add(IMDbMovie.builder().ImdbId("tt0938313").name("The Lost World").build());
+		movieList.add(IMDbMovie.builder().imdbId("tt0938313").name("The Lost World").build());
 		given(imDbMovieService.findMovieByYearAndGenre("1997","Action").containsAll(movieList));
 
 		// action

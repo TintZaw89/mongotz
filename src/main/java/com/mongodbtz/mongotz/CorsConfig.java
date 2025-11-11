@@ -13,8 +13,9 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings( CorsRegistry registry) {
+                String hostIP = System.getProperty("param1");
                 registry.addMapping("/**") // Apply to all endpoints
-                        .allowedOrigins("http://10.1.54.207:3000","http://10.1.54.208:3000","http://10.1.54.123:3000", "http://another-allowed-origin.com") // Specify allowed origins
+                        .allowedOrigins("http://"+ hostIP + ":3000","http://localhost:3000", "http://another-allowed-origin.com") // Specify allowed origins
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Specify allowed HTTP methods
                         .allowedHeaders("*") // Allow all headers
                         .allowCredentials(true) // Allow credentials (e.g., cookies)

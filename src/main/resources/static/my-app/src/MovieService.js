@@ -1,7 +1,6 @@
 import axios from 'axios'
-
-const IMDB_MOVIE_BASE_REST_API_URL = 'http://10.1.54.207:8100/api/imdbMovie';
-
+const host = process.env.REACT_APP_HOST;
+const IMDB_MOVIE_BASE_REST_API_URL = `http://${host}:8100/api/imdbMovie`;
 class MovieService{
 
     createMovie(movie){

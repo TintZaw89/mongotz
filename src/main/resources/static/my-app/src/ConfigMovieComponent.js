@@ -64,15 +64,14 @@ const ConfigMovieComponent = () => {
                             <form>
                                 <div className = "form-group mb-2">
                                     <label className = "form-label"> Summary :</label>
-                                    <input
-                                        type = "text"
+                                    <textarea rows="4" cols="50"
                                         placeholder = "Edit Summary"
                                         name = "summary"
                                         className = "form-control"
                                         value = {summaryText}
                                         onChange = {(e) => setSummaryText(e.target.value)}
                                     >
-                                    </input>
+                                    </textarea>
                                 </div>
 
 
