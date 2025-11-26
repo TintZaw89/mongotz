@@ -14,7 +14,7 @@ const ConfigMovieComponent = () => {
 
         if(id){
             MovieService.updateMovie(id, movie).then((response) => {
-                history.push('/imdbmovie')
+                history.push('/imdbmovie');
             }).catch(error => {
                 console.log(error)
             })
@@ -40,7 +40,7 @@ const ConfigMovieComponent = () => {
         }).catch(error => {
             console.log(error)
         })
-    }, [])
+    }, [id])
 
     const title = () => {
 
@@ -74,9 +74,10 @@ const ConfigMovieComponent = () => {
                                     </textarea>
                                 </div>
 
-
+                                <div>
                                 <button className = "btn btn-success" onClick = {(e) => saveOrUpdateMovie(e)} >Submit </button>
                                 <Link to="/imdbmovie" className="btn btn-danger"> Cancel </Link>
+                                </div>
                             </form>
 
                         </div>

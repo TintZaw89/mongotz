@@ -6,6 +6,7 @@ const Dropdown = ({ onSelectChange }) => {
   };
 
   return (
+    <div>
     <select onChange={handleChange}>
       <option value="">--Please choose an option--</option>
       <option value="option1">Title</option>
@@ -13,6 +14,7 @@ const Dropdown = ({ onSelectChange }) => {
       <option value="option3">Year</option>
       <option value="option5">Director</option>
     </select>
+    </div>
   );
 };
 

@@ -1,5 +1,8 @@
 export const selectData = (selectedValue) => {
-    if(selectedValue === 'option1' || selectedValue === '') {
+    if (selectedValue === '') {
+        return 'getMovieByTitle/300'
+    }
+    if(selectedValue === 'option1' ) {
         return 'getMovieByTitle/'
     }
     if(selectedValue === 'option2') {

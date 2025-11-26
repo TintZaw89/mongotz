@@ -12,7 +12,7 @@ class MovieService{
     }
 
     updateMovie(movieId, movie){
-        return axios.put(IMDB_MOVIE_BASE_REST_API_URL + '/updateMovie/' +movieId, movie);
+        return axios.put(IMDB_MOVIE_BASE_REST_API_URL + '/updateMovie/' + movieId, movie);
     }
 
     deleteMovie(movieId){
@@ -20,4 +20,5 @@ class MovieService{
     }
 }
 
-export default new MovieService();
+// eslint-disable-next-line import/no-anonymous-default-export
+export default new MovieService(); //new
