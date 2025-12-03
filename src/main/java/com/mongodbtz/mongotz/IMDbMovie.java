@@ -1,4 +1,6 @@
 package com.mongodbtz.mongotz;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,14 +21,6 @@ import java.util.ArrayList;
 @Document("ImdbMovies")
 public class IMDbMovie {
 
-    @Getter
-    protected static class Cast {
-        private final String name;
-        public Cast(String name) {
-            this.name = name;
-        }
-    }
-
     @Id
     private String _id;
     @Field(value = "ImdbId")
@@ -42,6 +36,7 @@ public class IMDbMovie {
     private String ratingCount;
     @Field(value="director.name")
     private String director;
+    //@JsonDeserialize(builder = Cast.class)
     @Field(value="cast")
     private ArrayList<Cast> cast;
 

@@ -1,11 +1,6 @@
 package com.mongodbtz.mongotz;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
-
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +9,15 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static org.springframework.core.OrderComparator.sort;
-
 //@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/imdbMovie")
 public class IMDbMovieController {
     @Autowired
     private IMDbMovieRepository imDbMovieRepository;
+
+    @Autowired
+    private ImDbMovieService imDbMovieService;
 
     private IMDbMovie imDbMovie;
 
@@ -60,8 +56,7 @@ public class IMDbMovieController {
         //String stringRegex = "{ name : { $regex : '" + name + "', $options: 'i' } }";
         //BasicQuery basicQuery = new BasicQuery(stringRegex);
         //imdbMovies = imdbTemplate.find(basicQuery, IMDbMovie.class);
-        imdbMovies = imDbMovieRepository.findMovieByTitle(name);
-        logger.info(imdbMovies);
+        imdbMovies = imDbMovieService.findMovieByTitle(name);
         return ResponseEntity.ok(imdbMovies);
     }
 
@@ -78,32 +73,29 @@ public class IMDbMovieController {
     @GetMapping("/getMovieByYear/{year}")
     public ResponseEntity<List<IMDbMovie>> findMovieByYearLike(@PathVariable("year") String year){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByYear(year);
-        logger.info(imdbMovies);
+        imdbMovies = imDbMovieService.findMovieByYear(year);
         return ResponseEntity.ok(imdbMovies);
     }
+
 
     @GetMapping("/getMovieByGenre/{genre}")
     public ResponseEntity<List<IMDbMovie>> findMovieByGenre(@PathVariable("genre") String genre){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByGenre(genre);
-        logger.info(imdbMovies);
+        imdbMovies = imDbMovieService.findMovieByGenre(genre);
         return ResponseEntity.ok(imdbMovies);
     }
 
     @GetMapping("/getMovieByDirector/{director}")
     public ResponseEntity<List<IMDbMovie>> findMovieByDirector(@PathVariable("director") String director){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByDirectorLike(director);
-        logger.info(imdbMovies);
+        imdbMovies = imDbMovieService.findMovieByDirector(director);
         return ResponseEntity.ok(imdbMovies);
     }
 
     @GetMapping("/getMovieByCast/{cast}")
     public ResponseEntity<List<IMDbMovie>> findMovieByCastLike(@PathVariable("cast") String cast){
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByCastName(cast);
-        logger.info(imdbMovies);
+        imdbMovies = imDbMovieService.findMovieByCast(cast);
         return ResponseEntity.ok(imdbMovies);
     }
 
