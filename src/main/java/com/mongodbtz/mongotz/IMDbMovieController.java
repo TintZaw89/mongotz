@@ -17,9 +17,7 @@ public class IMDbMovieController {
     private IMDbMovieRepository imDbMovieRepository;
 
     @Autowired
-    private ImDbMovieService imDbMovieService;
-
-    private IMDbMovie imDbMovie;
+    private ImDbMovieService imDbMovieService; //private IMDbMovie imDbMovie;
 
     private final MongoTemplate imdbTemplate;
 

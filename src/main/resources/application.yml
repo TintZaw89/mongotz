@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: mongotz
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/Movies
+
+slf4j:
+  provider: ch.qos.logback.classic.spi.LogbackServiceProvider
+
+logging:
+  config: classpath:log4j2.xml
+
+server:
+  address: 10.1.55.229
+  port: 8100
