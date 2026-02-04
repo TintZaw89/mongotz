@@ -12,5 +12,5 @@ logging:
   config: classpath:log4j2.xml
 
 server:
-  address: 10.1.55.229
+  address: 0.0.0.0
   port: 8100
