@@ -19,6 +19,7 @@ public class WikiMoviesController {
         this.mongoTemplate = mongoTemplate;
     }
 
+    @SuppressWarnings("null")
     @PostMapping("/addMovie")
     public WikiMovie addMovie(@RequestBody WikiMovie movie) {
         return wikiMovieRepo.save(movie);

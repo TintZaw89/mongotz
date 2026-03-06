@@ -19,14 +19,12 @@ public class IMDbMovieController {
     @Autowired
     private ImDbMovieService imDbMovieService; //private IMDbMovie imDbMovie;
 
-    private final MongoTemplate imdbTemplate;
-
     private static final Logger logger = LogManager.getLogger(IMDbMovieController.class);
 
     public IMDbMovieController(MongoTemplate imdbTemplate) {
-        this.imdbTemplate = imdbTemplate;
     }
 
+    @SuppressWarnings("null")
     @PostMapping("/addMovie")
     public IMDbMovie addMovie(@RequestBody IMDbMovie movie) {
         return imDbMovieRepository.save(movie);
@@ -43,6 +41,7 @@ public class IMDbMovieController {
         return imDbMovieRepository.findAll();
     }
     
+    @SuppressWarnings("null")
     @GetMapping("/getMovie/{_id}")
     public Optional<IMDbMovie> getMovieById(@PathVariable("_id") String _id) {
         return imDbMovieRepository.findById(_id);

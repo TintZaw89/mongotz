@@ -1,6 +1,6 @@
 package com.mongodbtz.mongotz;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+//import com.fasterxml.jackson.annotation.JsonProperty;
+//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

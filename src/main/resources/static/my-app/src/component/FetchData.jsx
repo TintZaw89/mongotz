@@ -37,13 +37,13 @@ function FetchData() {
 
 	<div className='container'>
         <div>
-        Search with <MyDropdown  onSelectChange={handleDropdownChange} />
+        Search Criteria <MyDropdown onSelectChange={handleDropdownChange} /> 
         <MyForm onSearch={handleSearch} />
         </div>
 		<div className='mt-3'>
-		<h1 className="text-center">Imdb Movie Lists </h1>
+		<h1 className="text-center">IMDb Movie Query</h1>
     <div>
-        <MovieTable movies={currentPosts}/>    
+        <MovieTable movies={currentPosts} page={currentPage}/>    
         Total Record{movieSize}: {data?.length}{setPostsPerPage}
         <Pagination totalPosts={data?.length}
                     postsPerPage={postsPerPage}

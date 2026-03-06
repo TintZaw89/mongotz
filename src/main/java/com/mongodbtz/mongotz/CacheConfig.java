@@ -17,7 +17,8 @@ import java.util.Map;
 @EnableCaching
 public class CacheConfig {
 
-    @Bean
+@SuppressWarnings("null")
+@Bean
     public RedisCacheManager cacheManager (RedisConnectionFactory redisConnectionFactory) {
 
         String cacheMin = System.getProperty("param3");
