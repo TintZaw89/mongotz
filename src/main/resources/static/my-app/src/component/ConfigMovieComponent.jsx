@@ -11,10 +11,15 @@ const ConfigMovieComponent = () => {
         e.preventDefault();
 
         const movie = {summaryText}
+        
+        const dataToSend = {
+            id: id,
+            message: 'Update successfully!'
+        }
 
         if(id){
             MovieService.updateMovie(id, movie).then((response) => {
-                history.push('/imdbmovie');
+                history('/imdbmovieid', {state: dataToSend});
             }).catch(error => {
                 console.log(error)
             })
@@ -50,6 +55,11 @@ const ConfigMovieComponent = () => {
             return <h2 className = "text-center">Add Movie</h2>
         }
     }
+	
+	const labelStyle = {
+    fontSize: '24px', // Note the string value in inline styles
+    color: 'blue'
+  };
 
     return (
         <div>
@@ -63,8 +73,8 @@ const ConfigMovieComponent = () => {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Summary :</label>
-                                    <textarea rows="4" cols="50"
+                                    <label className = "form-label" style={labelStyle}> Summary :</label>
+                                    <textarea rows="2" cols="50"
                                         placeholder = "Edit Summary"
                                         name = "summary"
                                         className = "form-control"
@@ -72,6 +82,7 @@ const ConfigMovieComponent = () => {
                                         onChange = {(e) => setSummaryText(e.target.value)}
                                     >
                                     </textarea>
+									
                                 </div>
 
                                 <div>

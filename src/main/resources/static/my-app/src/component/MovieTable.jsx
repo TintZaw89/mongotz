@@ -5,6 +5,7 @@ const MovieTable = props =>
 {
     const { movies, page } = props;
     const currPage = (page - 1) * 10 ;
+
     return (
         <div className= "container">
         <table className="table table-striped" >

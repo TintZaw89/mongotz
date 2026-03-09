@@ -7,13 +7,14 @@ import { selectData } from './SelectedValue';
 import Pagination from './Pagination';
 import MovieTable from './MovieTable';
 function FetchData() {
-	const [data, setData] = useState([])
+	  const [data, setData] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
     const [currentPage,setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(10)
     const handleDropdownChange = (value) => {
     setSelectedValue(value);
   };
+
     const handleSearch = async ( query) => {
     try {
         var ddlData = selectData (selectedValue);
@@ -27,7 +28,7 @@ function FetchData() {
   };
 
     const lastPostIndex = currentPage * postsPerPage;
-    const fistPostIndex = lastPostIndex - postsPerPage;
+    const fistPostIndex = lastPostIndex - postsPerPage;    
     const currentPosts = data?.slice(fistPostIndex, lastPostIndex)
     let movieSize;
     if (!data.length === null || !data.length === "" || data.length > 1 ) 

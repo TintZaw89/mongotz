@@ -15,7 +15,7 @@ const ErrorFallback = ({ error }) => {
           {error && error.toString()}
         </details>
       )}
-      <button onClick={refreshPage}>Go to About Page</button>
+      <button onClick={refreshPage}>Go to Home Page</button>
     </div>
   );
 };

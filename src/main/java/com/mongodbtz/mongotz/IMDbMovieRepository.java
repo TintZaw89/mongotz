@@ -27,4 +27,7 @@ public interface IMDbMovieRepository extends MongoRepository<IMDbMovie,String>{
     @Update("{ '$set' : { 'summary_text' : ?1 } }")
     void findMovieByImdbId(String _id, String summaryText);
 
+    @Query("{'_id' : ?0}")
+    IMDbMovie findMovieById(String _id);
+
 }
